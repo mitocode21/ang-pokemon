@@ -1,20 +1,42 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<section>
+  <div>
+    <img class="pokemon" src="https://vignette.wikia.nocookie.net/es.pokemon/images/b/be/Charmander_%28anime_SO%29.png/revision/latest?cb=20120906002506"
+      width="150" height="150">
+    <div class="healthbar">
+      <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" [ngStyle]="{width: charmanderSalud + '%'}">
+        {{ charmanderSalud}}
+      </div>
+    </div>
+  </div>
+  <div>
+    <img class="pokemon" src="https://vignette.wikia.nocookie.net/es.pokemon/images/5/5d/Pikachu_%28anime_DP%29.png/revision/latest?cb=20120906045146"
+      height="150">
+    <div class="healthbar">
+      <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" [ngStyle]="{width: pikachuSalud + '%'}">
+        {{ pikachuSalud}}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="controls" *ngIf="!gameIsRunning">
+  <div class="small-12 columns">
+    <button id="start-game" (click)="iniciarJuego()">NUEVO JUEGO</button>
+  </div>
+</section>
+<section class="controls" v-else>
+  <div>
+    <button id="attack" (click)="atacar()">ATAQUE</button>
+    <button id="special-attack" (click)="specialAttack()">ATAQUE ESPECIAL</button>
+    <button id="heal" (click)="heal()">CURAR</button>
+    <button id="give-up" (click)="giveUp()">RENDIRSE</button>
+  </div>
+</section>
+<section class="log" *ngIf="turnos.length > 0">
+  <div>
+    <ul>
+      <li *ngFor="let turn of turnos" [ngStyle]="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+        {{turn.text}}
+      </li>
+    </ul>
+  </div>
+</section>
